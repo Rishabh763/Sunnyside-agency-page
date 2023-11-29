@@ -23,7 +23,7 @@
   <body>
     <main>
       <div class="page1">
-        <nav>
+        <nav id="navbar">
           <div class="nleft">sunnyside</div>
           <div class="nright">
             <ul>
@@ -39,7 +39,7 @@
           <h1>We are creatives</h1>
         </div>
         <div class="arrow">
-          <i class="ri-arrow-down-line"></i>
+          <a href="#Services"><img src="./images/icon-arrow-down.svg" alt=""></a>
         </div>
       </div>
 
@@ -145,9 +145,9 @@
             <div class="nleft">sunnyside</div>
             <div class="nright">
               <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Projects</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Services">Services</a></li>
+                <li><a href="#Project">Projects</a></li>
               </ul>
             </div>
           </nav>
@@ -161,11 +161,23 @@
             Challenge by
             <a
               href="https://www.frontendmentor.io?ref=challenge"
-              target="_blank">Frontend Mentor
-              </a>. Coded by <a href="#">Rishabh Singh</a>.
+              target="_blank">Frontend Mentor</a>. Coded by <a href="#">Rishabh Singh</a>.
           </div>
         </footer>
       </section>
     </main>
+
+    <script>
+      var prevScrollpos = window.pageYOffset;
+      window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+          document.getElementById("navbar").style.top = "0";
+        } else {
+          document.getElementById("navbar").style.top = "-10vh";
+        }
+        prevScrollpos = currentScrollPos;
+      };
+    </script>
   </body>
 </html>
