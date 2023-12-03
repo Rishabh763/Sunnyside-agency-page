@@ -23,10 +23,20 @@
   <body>
     <main>
       <div class="page1">
+        <div class="mode">
+          <button onclick="changeBackgroundColor()">
+            <i class="ri-sun-fill"></i>
+          </button>
+        </div>
         <nav id="navbar">
           <div class="nleft">sunnyside</div>
           <div class="nright">
-            <ul>
+            <div class="hamburger">
+              <div class="line1"></div>
+              <div class="line2"></div>
+              <div class="line3"></div>
+            </div>
+            <ul class="nav-links">
               <li><a href="#About">About</a></li>
               <li><a href="#Services">Services</a></li>
               <li><a href="#Project">Projects</a></li>
@@ -39,7 +49,9 @@
           <h1>We are creatives</h1>
         </div>
         <div class="arrow">
-          <a href="#Services"><img src="./images/icon-arrow-down.svg" alt=""></a>
+          <a href="#Services">
+            <img src="./images/icon-arrow-down.svg" alt="">
+          </a>
         </div>
       </div>
 
@@ -84,7 +96,7 @@
       </section>
 
       <section id="About">
-        <div class="page3" >
+        <div class="page3">
           <div class="title">Client testimonials</div>
           <div class="container">
             <div class="testimonials">
@@ -161,21 +173,73 @@
             Challenge by
             <a
               href="https://www.frontendmentor.io?ref=challenge"
-              target="_blank">Frontend Mentor</a>. Coded by <a href="#">Rishabh Singh</a>.
+              target="_blank"
+              >Frontend Mentor</a
+            >. Coded by <a href="#">Rishabh Singh</a>.
           </div>
         </footer>
       </section>
     </main>
 
     <script>
+      const hamburger = document.querySelector(".hamburger");
+      const navLinks = document.querySelector(".nav-links");
+      const links = document.querySelectorAll(".nav-links li");
+
+      hamburger.addEventListener("click", () => {
+        //Animate Links
+        navLinks.classList.toggle("open");
+        links.forEach((link) => {
+          link.classList.toggle("fade");
+        });
+
+        //Hamburger Animation
+        hamburger.classList.toggle("toggle");
+      });
+
+      const navbtnbg = document.querySelector("ul>li:nth-child(4)");
+      const navclr = document.querySelector(".page1>nav");
+      const bgbtn = document.querySelector(".mode>button");
+      const root = document.querySelector(":root");
+
+      let isBackgroundChanged = false; // Track the state
+
+      function changeBackgroundColor() {
+        if (isBackgroundChanged) {
+          root.style.setProperty("--clr-fs", "#000"); // Set back to the original color
+          root.style.setProperty("--invert", "#fff"); // Set back to the original color
+          root.style.setProperty("color-scheme", "only light");
+          bgbtn.style.backgroundColor = "#fff";
+          // navbtnbg.style.backgroundColor = "#fff";
+          navclr.style.color = "#000";
+        } else {
+          root.style.setProperty("--clr-fs", "#fff");
+          root.style.setProperty("--invert", "#000");
+          root.style.setProperty("color-scheme", "only dark"); // Change to the new color
+          bgbtn.style.backgroundColor = "#000";
+          // navbtnbg.style.backgroundColor = "#000";
+          navclr.style.color = "#fff";
+        }
+
+        isBackgroundChanged = !isBackgroundChanged; // Toggle the state
+      }
+
       var prevScrollpos = window.pageYOffset;
+
       window.onscroll = function () {
         var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-          document.getElementById("navbar").style.top = "0";
-        } else {
-          document.getElementById("navbar").style.top = "-10vh";
+        var navLinks = document.querySelector(".nav-links");
+        var isNavOpen = navLinks.classList.contains("open");
+
+        if (!isNavOpen) {
+          // Check if the hamburger menu is not open
+          if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+          } else {
+            document.getElementById("navbar").style.top = "-10vh";
+          }
         }
+
         prevScrollpos = currentScrollPos;
       };
     </script>
